@@ -17,4 +17,11 @@
 # limitations under the License.
 #
 
-include_recipe 'hadoop::hadoop_hdfs_namenode'
+include_recipe 'zip_hdfs::default'
+include_recipe 'hadoop::hadoop_hdfs_datanode'
+
+ruby_block 'service-hadoop-hdfs-namenode-start' do
+  block do
+    resources('service[hadoop-hdfs-namenode]').run_action(:start)
+  end
+end

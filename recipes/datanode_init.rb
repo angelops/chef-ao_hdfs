@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: zip_hdfs
-# Recipe:: namenode
+# Recipe:: datanode_init
 #
 # Copyright (C) 2016 Justin Alan Ryan (ZipRealty / Realogy)
 #
@@ -18,10 +18,4 @@
 #
 
 include_recipe 'zip_hdfs::default'
-include_recipe 'hadoop::hadoop_hdfs_namenode'
-
-ruby_block 'service-hadoop-hdfs-namenode-start' do
-  block do
-    resources('service[hadoop-hdfs-namenode]').run_action(:start)
-  end
-end
+include_recipe 'hadoop::hadoop_hdfs_datanode'
