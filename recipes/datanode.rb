@@ -20,8 +20,8 @@
 include_recipe 'zip_hdfs::default'
 include_recipe 'hadoop::hadoop_hdfs_datanode'
 
-ruby_block 'service-hadoop-hdfs-namenode-start' do
+ruby_block 'service-hadoop-hdfs-datanode-start' do
   block do
-    resources('service[hadoop-hdfs-namenode]').run_action(:start)
+    resources('service[hadoop-hdfs-datanode]').run_action(:start)
   end
 end
