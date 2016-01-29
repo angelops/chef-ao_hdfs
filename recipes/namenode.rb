@@ -22,6 +22,8 @@ include_recipe 'hadoop::hadoop_hdfs_namenode'
 
 ruby_block 'service-hadoop-hdfs-namenode-start' do
   block do
-    resources('service[hadoop-hdfs-namenode]').run_action(:start)
+    %w(enable start).each do |action|
+      resources('service[hadoop-hdfs-namenode]').run_action(action.to_sym)
+    end
   end
 end
