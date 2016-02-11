@@ -27,3 +27,8 @@ ruby_block 'service-hadoop-hdfs-datanode-start' do
     end
   end
 end
+
+directory node['hdfs_site']['dfs.datanode.data.dir'] do
+  action :create
+end
+

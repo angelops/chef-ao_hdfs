@@ -19,3 +19,8 @@
 
 include_recipe 'zip_hdfs::default'
 include_recipe 'hadoop::hadoop_hdfs_datanode'
+
+directory node['hdfs_site']['dfs.datanode.data.dir'] do
+  action :create
+end
+
