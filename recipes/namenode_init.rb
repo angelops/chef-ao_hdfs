@@ -37,4 +37,5 @@ end
 
 directory node['hdfs_site']['dfs.datanode.data.dir'] do
   action :create
+  recursive :true
 end
