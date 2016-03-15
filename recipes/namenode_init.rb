@@ -20,6 +20,12 @@
 include_recipe 'zip_hdfs::default'
 include_recipe 'hadoop::hadoop_hdfs_namenode'
 
+
+directory node['hdfs_site']['dfs.namenode.data.dir'] do
+  action :create
+  recursive true
+end
+
 # cargo cult from https://github.com/caskdata/hadoop_wrapper_cookbook/blob/master/recipes/hadoop_hdfs_namenode_init.rb
 
 ### TODO: due to a bug in the underlying hadoop cookbook where hadoop.tmp.dir can contain '${user}', for now
@@ -33,9 +39,4 @@ ruby_block 'initaction-format-namenode' do
   not_if { File.exist? marker_file }
   ### TODO: this should check all dfs name dirs, not just the first
   # only_if { (Dir.entries("#{node['hadoop']['hdfs_site']['dfs.name.dir'].split(',').first}") - %w{ . .. }).empty? }
-end
-
-directory node['hdfs_site']['dfs.datanode.data.dir'] do
-  action :create
-  recursive true
 end

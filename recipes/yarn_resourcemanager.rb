@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: zip_hdfs
-# Recipe:: datanode
+# Recipe:: namenode
 #
 # Copyright (C) 2016 Justin Alan Ryan (ZipRealty / Realogy)
 #
@@ -18,18 +18,12 @@
 #
 
 include_recipe 'zip_hdfs::default'
-include_recipe 'hadoop::hadoop_hdfs_datanode'
+include_recipe 'hadoop::hadoop_yarn_resourcemanager'
 
-#ruby_block 'service-hadoop-hdfs-datanode-start' do
-#  block do
-#    %w(enable start).each do |action|
-#      resources('service[hadoop-hdfs-datanode]').run_action(action.to_sym)
-#    end
-#  end
-#end
-
-directory node['hdfs_site']['dfs.datanode.data.dir'] do
-  action :create
-  recursive true
+ruby_block 'service-hadoop-yarn-resourcemanager-start' do
+  block do
+    %w(enable start).each do |action|
+      resources('service[hadoop-yarn-resourcemanager]').run_action(action.to_sym)
+    end
+  end
 end
-

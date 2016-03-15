@@ -18,12 +18,12 @@
 #
 
 include_recipe 'zip_hdfs::default'
-include_recipe 'hadoop::hadoop_hdfs_datanode'
+include_recipe 'hadoop::hadoop_yarn_nodemanager'
 
-#ruby_block 'service-hadoop-hdfs-datanode-start' do
+#ruby_block 'service-hadoop-yarn-nodemanager-start' do
 #  block do
 #    %w(enable start).each do |action|
-#      resources('service[hadoop-hdfs-datanode]').run_action(action.to_sym)
+#      resources('service[hadoop-yarn-nodemanager]').run_action(action.to_sym)
 #    end
 #  end
 #end
