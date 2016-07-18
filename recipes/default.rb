@@ -35,3 +35,6 @@ if node.key?('java') && node['java'].key?('java_home')
 end
 
 include_recipe 'hadoop::default'
+
+package 'hive'
+package 'sqoop'
